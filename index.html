@@ -4,51 +4,61 @@
     <meta charset="UTF-8">
     <title>朱富贵火锅消费计算器</title>
     <style>
-         body {
+        body {
             font-family: 'Microsoft YaHei', sans-serif;
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #ccc;
+            max-width: 800px;  /* 原400px */
+            margin: 80px auto;  /* 原40px */
+            padding: 60px;  /* 原30px */
+            border: 4px solid #ccc;  /* 原2px */
         }
+        body > div {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        /* 修改：标题样式 */
         h2, h3 {
             text-align: center;
-            margin: 10px 0;
+            margin: 20px 0;  /* 原10px */
+            font-size: 2.5em;  /* 新增 */
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 40px 0;  /* 原20px */
         }
         th, td {
-            border-bottom: 2px dashed #999;
-            padding: 10px;
+            border-bottom: 4px dashed #999;  /* 原2px */
+            padding: 20px;  /* 原10px */
+            font-size: 2em;  /* 新增：放大文字 */
         }
         .quantity-control {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 20px;  /* 原10px */
         }
         button {
-            padding: 4px 16px;
+            padding: 8px 32px;  /* 原4px 16px */
             cursor: pointer;
+            font-size: 1.5em;  /* 新增：放大按钮文字 */
         }
         .discount-row {
-            margin-top: 20px;
+            margin-top: 40px;  /* 原20px */
         }
         .time {
-            font-size: 0.9em;
+            font-size: 1.8em;  /* 原0.9em */
             color: #666;
         }
         #resetBtn {
             width: 100%;
-            margin-top: 20px;
-            padding: 16px;
+            margin-top: 40px;  /* 原20px */
+            padding: 32px;  /* 原16px */
+            font-size: 1.5em;  /* 新增：放大按钮文字 */
         }
         #discountSelect {
             width: 100%;
-            margin: 20px 0;
-            padding: 10px;
+            margin: 40px 0;  /* 原20px */
+            padding: 20px;  /* 原10px */
+            font-size: 1.5em;  /* 新增：放大下拉框文字 */
         }
     </style>
 </head>
