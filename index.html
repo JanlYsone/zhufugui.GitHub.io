@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <title>朱富贵火锅消费计算器</title>
     <style>
-        body {
+         body {
             font-family: 'Microsoft YaHei', sans-serif;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 15px;
-            border: 1px solid #ccc;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #ccc;
         }
         h2, h3 {
             text-align: center;
-            margin: 5px 0;
+            margin: 10px 0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px 0;
+            margin: 20px 0;
         }
         th, td {
-            border-bottom: 1px dashed #999;
-            padding: 5px;
+            border-bottom: 2px dashed #999;
+            padding: 10px;
         }
         .quantity-control {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
         button {
-            padding: 2px 8px;
+            padding: 4px 16px;
             cursor: pointer;
         }
         .discount-row {
-            margin-top: 10px;
+            margin-top: 20px;
         }
         .time {
             font-size: 0.9em;
@@ -42,13 +42,13 @@
         }
         #resetBtn {
             width: 100%;
-            margin-top: 10px;
-            padding: 8px;
+            margin-top: 20px;
+            padding: 16px;
         }
         #discountSelect {
             width: 100%;
-            margin: 10px 0;
-            padding: 5px;
+            margin: 20px 0;
+            padding: 10px;
         }
     </style>
 </head>
@@ -75,11 +75,11 @@
                 <td>
                     <div class="quantity-control">
                         <button onclick="updateQuantity(this, -1)">-</button>
-                        <span>2</span>
+                        <span>0</span>
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
                 </td>
-                <td class="subtotal">10.00</td>
+                <td class="subtotal">0.00</td>
             </tr>
             <tr data-price="10">
                 <td>黄盘</td>
@@ -87,11 +87,11 @@
                 <td>
                     <div class="quantity-control">
                         <button onclick="updateQuantity(this, -1)">-</button>
-                        <span>2</span>
+                        <span>0</span>
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
                 </td>
-                <td class="subtotal">20.00</td>
+                <td class="subtotal">0.00</td>
             </tr>
             <tr data-price="15">
                 <td>红盘</td>
@@ -99,11 +99,11 @@
                 <td>
                     <div class="quantity-control">
                         <button onclick="updateQuantity(this, -1)">-</button>
-                        <span>1</span>
+                        <span>0</span>
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
                 </td>
-                <td class="subtotal">15.00</td>
+                <td class="subtotal">0.00</td>
             </tr>
             <tr data-price="22">
                 <td>铁盘</td>
@@ -111,11 +111,11 @@
                 <td>
                     <div class="quantity-control">
                         <button onclick="updateQuantity(this, -1)">-</button>
-                        <span>9</span>
+                        <span>0</span>
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
                 </td>
-                <td class="subtotal">198.00</td>
+                <td class="subtotal">0.00</td>
             </tr>
             <tr data-price="16">
                 <td>锅底&调料(人)</td>
@@ -123,11 +123,11 @@
                 <td>
                     <div class="quantity-control">
                         <button onclick="updateQuantity(this, -1)">-</button>
-                        <span>2</span>
+                        <span>0</span>
                         <button onclick="updateQuantity(this, 1)">+</button>
                     </div>
                 </td>
-                <td class="subtotal">32.00</td>
+                <td class="subtotal">0.00</td>
             </tr>
         </tbody>
     </table>
@@ -135,12 +135,11 @@
     <div class="discount-row">
         <select id="discountSelect" onchange="calculateTotal()">
             <option value="1">无折扣</option>
-            <option value="0.8">8折</option>
-            <option value="0.7176" selected>5.8折（示例折扣）</option>
+            <option value="0.68">6.8折</option>  <!-- 新增68折选项 --> 
         </select>
     </div>
 
-    <div>应付金额：<span id="total">197.24</span></div>
+    <div>应付金额：<span id="total">0.00</span></div>
     <div class="time">开单时间：<span id="orderTime"></span></div>
     <div class="time">打印时间：<span id="printTime"></span></div>
     <button id="resetBtn" onclick="resetAll()">重置小票</button>
@@ -193,9 +192,12 @@
         function resetAll() {
             document.querySelectorAll('.quantity-control span').forEach(span => {
                 span.textContent = '0';
-                span.parentElement.parentElement.querySelector('.subtotal').textContent = '0.00';
+                // 修正：通过tr查找subtotal
+                const row = span.closest('tr');
+                const price = parseFloat(row.dataset.price);
+                row.querySelector('.subtotal').textContent = (price * 0).toFixed(2);
             });
-            document.getElementById('discountSelect').value = '0.7176';
+            document.getElementById('discountSelect').value = '1';
             calculateTotal();
             setTime();
         }
